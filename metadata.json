@@ -1,0 +1,6 @@
+{
+  "name": "Multiplayer Euchre Card Game",
+  "description": "A real-time multiplayer Euchre card game with custom lobbies, secure authentication, and chat functionality.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

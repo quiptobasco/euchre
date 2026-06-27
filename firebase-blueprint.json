@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "A registered user of the Euchre game platform",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "displayName"]
+    },
+    "game": {
+      "title": "Game",
+      "description": "A Euchre game lobby and active game session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "status": { "type": "string", "enum": ["lobby", "bidding_1", "bidding_2", "discarding", "playing", "finished"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "seats": { "type": "array" },
+        "aiSeats": { "type": "array" },
+        "gameState": { "type": "object" }
+      },
+      "required": ["id", "name", "creatorId", "creatorName", "status", "seats"]
+    },
+    "chatMessage": {
+      "title": "Chat Message",
+      "description": "A real-time chat message sent inside a game lobby",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "senderId", "senderName", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "Saves user profile information"
+    },
+    "/games/{gameId}": {
+      "schema": "game",
+      "description": "Primary storage for Euchre lobbies and active match states"
+    },
+    "/games/{gameId}/chat/{messageId}": {
+      "schema": "chatMessage",
+      "description": "Real-time lobby chat messages"
+    }
+  }
+}
